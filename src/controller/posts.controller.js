@@ -6,9 +6,9 @@ export async function apiCreatePost(req, res) {
     const text = req.body.text;
     const visibility = req.body.visibility;
     //  const { userId, text, visibility } = req.body;
+
     const result = await createNewPost(userId, text, visibility);
     res.status(result.status).json({
-      success: result.success,
       data: result.data || null,
       message: result.message
     });

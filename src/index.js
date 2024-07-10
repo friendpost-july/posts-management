@@ -4,7 +4,7 @@ import { dbInit } from './dbInit.js';
 import postsRoute from './routes/posts.route.js';
 
 const app = express();
-const port = process.env.port;
+const port = process.env.port || 8080;
 
 // Middleware
 app.use(bodyParser.json());
