@@ -1,0 +1,11 @@
+GET http://google.com
+
+###
+POST http://localhost:15001/posts
+Content-Type: application/json
+
+{
+    "userId": "123",
+    "text": "First post using friendpost",
+    "visibility": "public"
+}
