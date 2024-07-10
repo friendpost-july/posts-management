@@ -1,5 +1,5 @@
 import { postModal } from '../schemas/posts.js';
-import getPostID from '../helper/common.js';
+import { getPostID } from '../helper/common.js';
 
 export async function createNewPost(userId, text, visibility) {
   try {
