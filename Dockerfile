@@ -15,6 +15,6 @@ COPY --chown=node:node /src/ .
 
 EXPOSE 8080
 
-ENV MONGO_URL="mongodb://127.0.0.1:27017"
+ENV MONGO_URL="mongodb://root:something@mongo:27017"
 
 CMD [ "node", "index.js" ]
