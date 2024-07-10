@@ -15,7 +15,7 @@ export async function createNewPost(userId, text, visibility) {
     console.log('Created new posts successfully');
     return {
       status: 200,
-      message: { postId: counter, visibility: visibility },
+      data: { postId: counter, visibility: visibility },
     };
   } catch (error) {
     return { status: 400, success: false, message: error };
