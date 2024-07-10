@@ -8,7 +8,7 @@ COPY --chown=node:node package*.json ./
 
 USER node
 
-RUN npm ci
+RUN npm ci --production
 
 #Copy application files
 COPY --chown=node:node /src/ .

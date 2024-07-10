@@ -7,5 +7,5 @@ set IMAGE_LATEST=%IMAGE_LIBRARY%/%IMAGE_NAME%:latest
 docker image build -t %IMAGE_VERSIONED% .
 docker image tag %IMAGE_VERSIONED% %IMAGE_LATEST%
 
-docker push %IMAGE_VERSIONED%
-docker push %IMAGE_LATEST%
+#docker push %IMAGE_VERSIONED%
+#docker push %IMAGE_LATEST%
