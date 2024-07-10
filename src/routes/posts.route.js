@@ -1,3 +1,6 @@
 import { Router } from 'express';
 
-Router.route('/').post(apiCreatePost);
+const router = new Router();
+router.route('/').post(apiCreatePost);
+
+export default router;

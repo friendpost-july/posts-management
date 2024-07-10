@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const initDb = require('./dbInit');
+const postsRoute = require('router');
 
 const app = express();
 const port = process.env.port;
@@ -10,30 +11,7 @@ app.use(bodyParser.json());
 initDb(); //Initializing DB
 
 //Create a post
-app.post('/posts/', (req, res) => {
-  // res.json(items);
-});
-
-//Get posts
-app.get('/posts/', (req, res) => {
-  // res.json(items);
-  res.send('OK');
-});
-
-//Update a post
-app.patch('/posts/:postId', (req, res) => {
-  // res.json(items);
-});
-
-//Delete a post
-app.delete('/posts/:postId', (req, res) => {
-  // res.json(items);
-});
-
-//Delete a post for user
-app.delete('/user/:userId', (req, res) => {
-  // res.json(items);
-});
+app.use('/posts', postsRoute);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
