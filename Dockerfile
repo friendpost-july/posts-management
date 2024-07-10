@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:lts-alpine
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
@@ -15,6 +15,6 @@ COPY --chown=node:node /src/ .
 
 EXPOSE 8080
 
-ENV MONGO_URL="mongodb://127.0.0.1:37017"
+ENV MONGO_URL="mongodb://127.0.0.1:27017"
 
 CMD [ "node", "index.js" ]
