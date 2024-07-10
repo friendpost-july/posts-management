@@ -1,4 +1,5 @@
 services:
+
   mongo:
     image: mongo
     restart: always
@@ -9,7 +10,13 @@ services:
       - mongovol:/data/db
     ports:
       - 37017:27017
-          
+
+  posts:
+    image: dinooppaloli/posts:latest
+    ports:
+      - 15001:8080
+    environment:
+      MONGO_URL: mongodb://127.0.0.1:37017
 
   mongo-express:
     image: mongo-express
