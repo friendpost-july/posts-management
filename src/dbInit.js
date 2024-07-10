@@ -1,14 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const mongo_url = process.env.MONGO_URL;
 
-async function dbInit() {
+export const dbInit = async () => {
   console.log('Connecting to DB....');
   try {
-    mongoose.connect(mongo_url);
+    await mongoose.connect(mongo_url);
     console.log('Database connected');
   } catch (error) {
     console.log('Error in connecting to the database');
   }
-}
-
-module.exports = dbInit;
+};

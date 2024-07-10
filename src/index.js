@@ -1,14 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const initDb = require('./dbInit');
-const postsRoute = require('router');
+import express from 'express';
+import bodyParser from 'body-parser';
+import { dbInit } from './dbInit.js';
+import postsRoute from './routes/posts.route.js';
 
 const app = express();
 const port = process.env.port;
 
 // Middleware
 app.use(bodyParser.json());
-initDb(); //Initializing DB
+dbInit(); //Initializing DB
 
 //Create a post
 app.use('/posts', postsRoute);
