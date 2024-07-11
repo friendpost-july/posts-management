@@ -93,3 +93,13 @@ export async function getAllPosts(
     totalPosts,
   };
 }
+
+
+export const deletPostsByuserID = async (userId) => {
+    const userDeleted = await postModal.deleteMany({ userId });
+    console.log(userDeleted);
+    return {
+        status: userDeleted.deletedCount ? 200 : 404,
+        message: !userDeleted.deletedCount && 'Post does not exits for the user ID',
+    };
+};

@@ -1,73 +1,72 @@
-import {
-  createNewPost,
-  getAllPosts,
-  getPostByID,
-} from '../methods/posts.method.js';
+import { createNewPost, deletPostsByuserID, getAllPosts, getPostByID } from '../methods/posts.method.js';
 import { deletePost } from '../methods/posts.method.js';
 
 export async function apiCreatePost(req, res) {
-  try {
-    const userId = req.body.userId;
-    const text = req.body.text;
-    const visibility = req.body.visibility;
-    //  const { userId, text, visibility } = req.body;
+    try {
+        const userId = req.body.userId;
+        const text = req.body.text;
+        const visibility = req.body.visibility;
+        //  const { userId, text, visibility } = req.body;
 
-    const result = await createNewPost(userId, text, visibility);
-    res.status(result.status).json({
-      data: result.data || null,
-      message: result.message,
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: false, message: err.message || 'Internal server err' });
-  }
+        const result = await createNewPost(userId, text, visibility);
+        res.status(result.status).json({
+            data: result.data || null,
+            message: result.message,
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message || 'Internal server err' });
+    }
 }
 
 export async function apiDeletePostByID(req, res) {
-  console.log(req);
-  try {
-    const postId = req.params.postId;
-    const result = await deletePost(postId);
-    res.status(result.status).json({
-      message: result.message,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: err.message || 'Internal server error',
-    });
-  }
+    console.log(req);
+    try {
+        const postId = req.params.postId;
+        const result = await deletePost(postId);
+        res.status(result.status).json({
+            message: result.message,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message || 'Internal server error',
+        });
+    }
 }
 
 export async function apiGetAllPosts(req, res) {
-  try {
-    const filter = req.body.filter;
-    if (!filter || !Object.keys(filter).length) {
-      res.status(400).json({
-        message: 'Provide valid filters.',
-      });
-    }
-    const userIds = filter.userIds;
-    const visibility = filter.visibility;
-    const limit = req.body.limit;
-    const skip = req.body.pageCount;
+    try {
+        const filter = req.body.filter;
+        if (!filter || !Object.keys(filter).length) {
+            res.status(400).json({
+                message: 'Provide valid filters.',
+            });
+        }
+        const userIds = filter.userIds;
+        const visibility = filter.visibility;
+        const limit = req.body.limit;
+        const skip = req.body.pageCount;
 
-    const results = await getAllPosts(userIds, visibility, limit, skip);
-    res.status(results.status).json({
-      posts: results.posts,
-      totalPosts: results.totalPosts,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: err.message || 'Internal server err',
-    });
-  }
+        const results = await getAllPosts(userIds, visibility, limit, skip);
+        res.status(results.status).json({
+            posts: results.posts,
+            totalPosts: results.totalPosts,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message || 'Internal server err',
+        });
+    }
 }
 
 export const apiGetPostByID = async (req, res) => {
-  console.log(req.params);
-  const results = await getPostByID(req.params.postId);
-  return res.send({ status: results.status || 200, post: results.data });
+    console.log(req.params);
+    const results = await getPostByID(req.params.postId);
+    return res.status(results.status || 200).send({ post: results.data });
+};
+
+export const apiDeletePostsByUserID = async (req, res) => {
+    const results = await deletPostsByuserID(req.params.userId);
+    return res.status(results.status || 200).send({ post: results.data });
 };
