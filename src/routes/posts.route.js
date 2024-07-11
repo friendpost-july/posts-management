@@ -8,10 +8,6 @@ const router = new Router();
 
 router.route('/').post(apiCreatePost);
 
-router
-  .route('/:postId')
-  .get(apiGetPostByID)
-  .put(apiUpdatePostByID)
-  .delete(apiDeletePostByID);
+router.route('/:postId').delete(apiDeletePostByID);
 
 export default router;
