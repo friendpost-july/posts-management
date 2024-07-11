@@ -1,4 +1,8 @@
-import { createNewPost, getAllPosts } from '../methods/posts.method.js';
+import {
+  createNewPost,
+  getAllPosts,
+  getPostByID,
+} from '../methods/posts.method.js';
 import { deletePost } from '../methods/posts.method.js';
 
 export async function apiCreatePost(req, res) {
@@ -47,7 +51,7 @@ export async function apiGetAllPosts(req, res) {
     const userIds = filter.userIds;
     const visibility = filter.visibility;
     const limit = req.body.limit;
-    const skip = req.body.skip;
+    const skip = req.body.pageCount;
 
     const results = await getAllPosts(userIds, visibility, limit, skip);
     res.status(results.status).json({
@@ -61,3 +65,9 @@ export async function apiGetAllPosts(req, res) {
     });
   }
 }
+
+export const apiGetPostByID = async (req, res) => {
+  console.log(req.params);
+  const results = await getPostByID(req.params.postId);
+  return res.send({ status: results.status || 200, post: results.post });
+};

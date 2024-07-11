@@ -43,6 +43,15 @@ export async function deletePost(postId) {
   }
 }
 
+export const getPostByID = async (postId) => {
+  try {
+    const post = await postModal.findOne({ postId: postId });
+    return { status: post ? 200 : 404, data: post };
+  } catch (error) {
+    return { status: 500, success: false, message: error };
+  }
+};
+
 export async function getAllPosts(
   userIds = [],
   visibility = '',
