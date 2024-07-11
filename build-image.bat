@@ -1,4 +1,4 @@
-set IMAGE_LIBRARY=dinooppaloli
+set IMAGE_LIBRARY=library
 set IMAGE_NAME=friendpost-posts
 set IMAGE_TAG=1.0
 set IMAGE_VERSIONED=%IMAGE_LIBRARY%/%IMAGE_NAME%:%IMAGE_TAG%
