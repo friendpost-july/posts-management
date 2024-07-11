@@ -9,3 +9,30 @@ Content-Type: application/json
     "text": "First post using friendpost",
     "visibility": "public"
 }
+
+### Add user
+POST http://localhost:15002/v1/users
+Content-Type: application/json
+
+{
+  "email": "dinoop7@gmail.com",
+  "profileName": "Hello",
+  "profilePic": "no",
+  "fullName": "string",
+  "gender": "male",
+  "dob": "2024-07-11",
+  "relationshipStatus": "single",
+  "currentCity": "string",
+  "homeTown": "string",
+  "interests": [
+    "walking"
+  ],
+  "hobbies": [
+    "jumbing"
+  ],
+  "active": true,
+  "createdAt": "2024-07-11T11:51:10.568Z",
+  "updatedAt": "2024-07-11T11:51:10.568Z",
+  "workPlace": "hpe",
+  "profession": "free"
+}

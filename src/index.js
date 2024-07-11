@@ -4,6 +4,8 @@ import { dbInit } from './dbInit.js';
 import postsRoute from './routes/posts.route.js';
 import { createCounterCollection } from './helper/common.js';
 import { searchRouter } from './routes/posts.search.route.js';
+import amqp from 'amqplib';
+//const amqp = require('amqplib');
 
 const app = express();
 const port = process.env.LISTEN_PORT || 8080;
@@ -15,6 +17,8 @@ const exchangeName = process.env.RABBITMQ_EXCHANGE_NAME || '';
 // Connect to RabbitMQ and start listening
 async function listenToRabbitMQ() {
   try {
+    console.log("RABBITMQ_URL",rabbitMqUrl)
+    console.log("RABBITMQ_EXCHANGE_NAME",exchangeName)
     const connection = await amqp.connect(rabbitMqUrl);
     const channel = await connection.createChannel();
 
