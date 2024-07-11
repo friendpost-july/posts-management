@@ -29,5 +29,19 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
       ME_CONFIG_BASICAUTH: false
 
+  eventbus:
+    image: rabbitmq:3.13.3-management-alpine
+    hostname: rmq
+    volumes:
+      - rmqvol:/var/lib/rabbitmq:rw
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=something
+      - RABBITMQ_ERLANG_COOKIE=chocochip
+
 volumes:
   mongovol:
+  rmqvol:
