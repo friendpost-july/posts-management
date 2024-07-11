@@ -37,9 +37,13 @@ export async function apiDeletePostByID(req, res) {
 }
 
 export async function apiGetAllPosts(req, res) {
-  console.log(req);
   try {
     const filter = req.body.filter;
+    if (!filter || !Object.keys(filter).length) {
+      res.status(400).json({
+        message: 'Provide valid filters.',
+      });
+    }
     const userIds = filter.userIds;
     const visibility = filter.visibility;
     const limit = req.body.limit;

@@ -14,9 +14,9 @@ dbInit(); //Initializing DB
 //creating counter collection
 createCounterCollection();
 //Create a post
-app.use('v1/posts', postsRoute);
+app.use('/v1/posts', postsRoute);
 
-app.use('v1/searchposts', searchRouter);
+app.use('/v1/searchposts', searchRouter);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

@@ -43,7 +43,12 @@ export async function deletePost(postId) {
   }
 }
 
-export async function getAllPosts(userIds=[], visibility = '', limit = 100, skip) {
+export async function getAllPosts(
+  userIds = [],
+  visibility = '',
+  limit = 100,
+  skip
+) {
   let query = {};
   if (
     (!userIds.length && visibility.toLowerCase() === 'public') ||
@@ -52,18 +57,21 @@ export async function getAllPosts(userIds=[], visibility = '', limit = 100, skip
     query.visibility = 'public';
   }
   if (userIds.length) {
-    query.userIds = userIds;
+    query.userId = userIds;
     if (visibility)
       query.visibility = visibility == 'public' ? 'public' : 'private';
   }
+  console.log(query);
   const results = await postModal.find(query).limit(limit).skip(skip);
+
+  console.log(results);
   if (!results.length)
     return {
       status: 200,
       posts: [],
       totalPosts: 0,
     };
-  const totalPosts = postModal.countDocuments(query);
+  const totalPosts = await postModal.countDocuments(query);
   return {
     status: 200,
     posts: results,
