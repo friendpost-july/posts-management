@@ -43,7 +43,7 @@ export async function deletePost(postId) {
   }
 }
 
-export async function getAllPosts(userIds, visibility, limit = 100, skip) {
+export async function getAllPosts(userIds=[], visibility = '', limit = 100, skip) {
   let query = {};
   if (
     (!userIds.length && visibility.toLowerCase() === 'public') ||
