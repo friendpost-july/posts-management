@@ -69,5 +69,5 @@ export async function apiGetAllPosts(req, res) {
 export const apiGetPostByID = async (req, res) => {
   console.log(req.params);
   const results = await getPostByID(req.params.postId);
-  return res.send({ status: results.status || 200, post: results.post });
+  return res.send({ status: results.status || 200, post: results.data });
 };
