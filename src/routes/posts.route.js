@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   apiCreatePost,
-  apiDeletePost,
+  apiDeletePostByID,
 } from '../controller/posts.controller.js';
 
 const router = new Router();
