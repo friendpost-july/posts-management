@@ -21,3 +21,24 @@ export async function createNewPost(userId, text, visibility) {
     return { status: 400, success: false, message: error };
   }
 }
+
+export async function deletePost(postId) {
+  try {
+    console.log(`Deleting post with postId: ${postId}`);
+    const deletedPost = await postModal.findOneAndDelete({ postId });
+
+    if (!deletedPost) {
+      return {
+        status: 404,
+        message: 'Post not found',
+      };
+    }
+    console.log('Post deleted successfully');
+    return {
+      status: 200,
+      message: 'Post deleted successfully',
+    };
+  } catch (error) {
+    return { status: 400, success: false, message: error.message };
+  }
+}

@@ -15,6 +15,7 @@ createCounterCollection();
 //Create a post
 app.use('/posts', postsRoute);
 
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

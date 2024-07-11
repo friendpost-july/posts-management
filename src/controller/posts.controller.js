@@ -1,4 +1,5 @@
 import { createNewPost } from '../methods/posts.method.js';
+import { deletePost } from '../methods/posts.method.js';
 
 export async function apiCreatePost(req, res) {
   try {
@@ -16,3 +17,20 @@ export async function apiCreatePost(req, res) {
     res.status(500).json({ success: false, message: err.message || 'Internal server err' });
   }
 }
+
+
+export async function apiDeletePostByID(req, res) {
+  try {
+    const postId = req.params.postId;
+    const result = await deletePost(postId);
+    res.status(result.status).json({
+      message: result.message,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'Internal server error',
+    });
+  }
+}
+
