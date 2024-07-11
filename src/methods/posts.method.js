@@ -42,3 +42,31 @@ export async function deletePost(postId) {
     return { status: 400, success: false, message: error.message };
   }
 }
+
+export async function getAllPosts(userIds, visibility, limit = 100, skip) {
+  let query = {};
+  if (
+    (!userIds.length && visibility.toLowerCase() === 'public') ||
+    (!userIds.length && !visibility)
+  ) {
+    query.visibility = 'public';
+  }
+  if (userIds.length) {
+    query.userIds = userIds;
+    if (visibility)
+      query.visibility = visibility == 'public' ? 'public' : 'private';
+  }
+  const results = await postModal.find(query).limit(limit).skip(skip);
+  if (!results.length)
+    return {
+      status: 200,
+      posts: [],
+      totalPosts: 0,
+    };
+  const totalPosts = postModal.countDocuments(query);
+  return {
+    status: 200,
+    posts: results,
+    totalPosts,
+  };
+}

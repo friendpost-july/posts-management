@@ -10,4 +10,7 @@ router.route('/').post(apiCreatePost);
 
 router.route('/:postId').delete(apiDeletePostByID);
 
+
+
+
 export default router;
