@@ -45,7 +45,10 @@ export async function deletePost(postId) {
 
 export const getPostByID = async (postId) => {
   try {
-    const post = await postModal.findOne({ postId: postId });
+    const post = await postModal.findOne(
+      { postId: postId },
+      { _id: 0, __v: 0 }
+    );
     return { status: post ? 200 : 404, data: post };
   } catch (error) {
     return { status: 500, success: false, message: error };
@@ -71,7 +74,10 @@ export async function getAllPosts(
       query.visibility = visibility == 'public' ? 'public' : 'private';
   }
   console.log(query);
-  const results = await postModal.find(query).limit(limit).skip(skip);
+  const results = await postModal
+    .find(query, { _id: 0, __v: 0 })
+    .limit(limit)
+    .skip(skip);
 
   console.log(results);
   if (!results.length)
