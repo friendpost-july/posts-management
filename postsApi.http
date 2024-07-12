@@ -1,4 +1,5 @@
-GET http://google.com
+###
+GET http://localhost:15001/health
 
 ###
 POST http://localhost:15001/posts

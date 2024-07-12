@@ -49,6 +49,12 @@ app.use('/v1/posts', postsRoute);
 
 app.use('/v1/searchposts', searchRouter);
 
+//Liveness probe
+app.get('/health', (req, res) => {
+  console.log("Liveness probe received")
+  res.status(200).send('I am healthy');
+});
+
 listenToRabbitMQ().then(() => {
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
